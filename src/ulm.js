@@ -8,7 +8,7 @@
     timer, step = 0;
   body.on('show:alert', function() {
     if(!step && original >= hold) {
-      alert('>>>>>>>>>>>>');
+      alert('>>>>>>>>>>>>')
       step = 1
     }
   });
@@ -20,16 +20,16 @@
   }
   
   $window.on('scrollevent', function() {
-    var top = body.scrollTop();
+    var top = body.scrollTop()
     if(timer) {
-      clearTimeout(timer);
+      clearTimeout(timer)
     }
     timer = setTimeout(function() {
       if(top <= hold) {
         css(body, '').trigger('show:alert')
       } else if(top < original) {
         step = 0;
-        clearTimeout(timer);
+        clearTimeout(timer)
         css(body, 'purple')
       } else {
         css(body, '')
