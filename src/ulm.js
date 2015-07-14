@@ -4,11 +4,17 @@
   var $window = $(window),
     body = $(document.body),
     original = body.scrollTop(),
+    height = $window.height(),
     hold = 300,
     timer, step = 0
-  body.on('show:alert', function() {
+  body.on('show:top', function() {
     if(!step && original >= hold) {
-      alert('>>>>>>>>>>>>')
+      alert(':(->top')
+      step = 1
+    }
+  }).on('show:bottom', function() {
+    if(!step) {
+      alert(':)->bottom')
       step = 1
     }
   })
@@ -18,7 +24,6 @@
       backgroundColor: color
     })
   }
-  
   $window.on('scrollevent', function() {
     var top = body.scrollTop()
     if(timer) {
@@ -26,7 +31,9 @@
     }
     timer = setTimeout(function() {
       if(top <= hold) {
-        css(body, '').trigger('show:alert')
+        css(body, '').trigger('show:top')
+      } else if(top + height >= body.height() - hold) {
+        css(body, '').trigger('show:bottom')
       } else if(top < original) {
         step = 0;
         clearTimeout(timer)
@@ -36,8 +43,8 @@
       }
       original = top
     }, 1)
+	
   }).on('scroll', function(e) {
-	  
     if(original !== body.scrollTop()) {
       $(this).trigger('scrollevent')
     }
