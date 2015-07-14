@@ -5,7 +5,8 @@
     body = $(document.body),
     original = body.scrollTop(),
     hold = 300,
-    timer, step = 0;
+    timer, step = 0
+	
   body.on('show:alert', function() {
     if(!step && original >= hold) {
       alert('>>>>>>>>>>>>')
